@@ -1,3 +1,3 @@
-tugas/image-10.png
-tugas/image-11.png
-tugas/image-12.png
+/image-10.png
+/image-11.png
+/image-12.png
