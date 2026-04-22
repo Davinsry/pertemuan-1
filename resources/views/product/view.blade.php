@@ -18,19 +18,11 @@
 
                         <div class="flex items-center gap-3">
                             @can('update', $product)
-                                <a href="{{ route('product.edit', $product->id) }}" class="inline-flex items-center px-4 py-2 bg-yellow-500 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-yellow-600 transition">
-                                    Edit
-                                </a>
+                                <x-edit-button :url="route('product.edit', $product->id)" />
                             @endcan
 
                             @can('delete', $product)
-                                <form action="{{ route('product.delete', $product->id) }}" method="POST" onsubmit="return confirm('Apakah anda yakin ingin menghapus data ini?')">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="inline-flex items-center px-4 py-2 bg-red-600 border border-transparent rounded-md font-semibold text-xs text-white uppercase tracking-widest hover:bg-red-700 transition">
-                                        Delete
-                                    </button>
-                                </form>
+                                <x-delete-button :url="route('product.delete', $product->id)" />
                             @endcan
                         </div>
                     </div>
