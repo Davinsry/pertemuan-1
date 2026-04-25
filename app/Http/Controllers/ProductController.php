@@ -29,8 +29,6 @@ class ProductController extends Controller
 
     public function store(StoreProductRequest $request)
     {
-        Gate::authorize('manage-product');
-
         $validated = $request->validated();
 
         try {
@@ -62,8 +60,6 @@ class ProductController extends Controller
 
     public function create()
     {
-        Gate::authorize('manage-product');
-
         $users = User::orderBy('name')->get();
         $categories = Category::orderBy('name')->get();
 
