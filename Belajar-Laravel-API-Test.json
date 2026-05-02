@@ -1,0 +1,324 @@
+{
+    "info": {
+        "_postman_id": "belajar-laravel-api-pertemuan-9",
+        "name": "Belajar Laravel - API Pertemuan 9",
+        "description": "Koleksi testing API CRUD untuk Product & Category dengan Laravel Sanctum Authentication. Import ke Postman, set base_url sesuai server, lalu run login terlebih dahulu.",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+    },
+    "item": [
+        {
+            "name": "1. AUTH - Login (Dapatkan Token)",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"email\": \"admin@example.com\",\n    \"password\": \"password\"\n}"
+                },
+                "url": {
+                    "raw": "{{base_url}}/api/login",
+                    "host": ["{{base_url}}"],
+                    "path": ["api", "login"]
+                },
+                "description": "Login untuk mendapatkan access_token. Copy value access_token ke Postman variable `access_token` (klik icon mata di sebelah kanan atas Postman → Environment / Global → tambah variable `access_token`)."
+            },
+            "response": []
+        },
+        {
+            "name": "PRODUCT - GET All (Public)",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/api/product",
+                    "host": ["{{base_url}}"],
+                    "path": ["api", "product"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "PRODUCT - GET Detail (Public)",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/api/product/1",
+                    "host": ["{{base_url}}"],
+                    "path": ["api", "product", "1"]
+                },
+                "description": "Ganti angka 1 di URL dengan ID product yang tersedia di database."
+            },
+            "response": []
+        },
+        {
+            "name": "PRODUCT - POST Create (Auth)",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{access_token}}",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"name\": \"Laptop Gaming\",\n    \"qty\": 10,\n    \"price\": 15000000,\n    \"user_id\": 1,\n    \"category_id\": 1\n}"
+                },
+                "url": {
+                    "raw": "{{base_url}}/api/product",
+                    "host": ["{{base_url}}"],
+                    "path": ["api", "product"]
+                },
+                "description": "Pastikan category_id tersedia di tabel categories. Ubah user_id & category_id sesuai data di database kamu."
+            },
+            "response": []
+        },
+        {
+            "name": "PRODUCT - PUT Update (Auth)",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{access_token}}",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"name\": \"Laptop Gaming Updated\",\n    \"qty\": 8,\n    \"price\": 14000000,\n    \"user_id\": 1,\n    \"category_id\": 1\n}"
+                },
+                "url": {
+                    "raw": "{{base_url}}/api/product/1",
+                    "host": ["{{base_url}}"],
+                    "path": ["api", "product", "1"]
+                },
+                "description": "Ganti angka 1 di URL dengan ID product yang ingin diupdate."
+            },
+            "response": []
+        },
+        {
+            "name": "PRODUCT - DELETE (Auth)",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{access_token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/api/product/1",
+                    "host": ["{{base_url}}"],
+                    "path": ["api", "product", "1"]
+                },
+                "description": "Ganti angka 1 di URL dengan ID product yang ingin dihapus."
+            },
+            "response": []
+        },
+        {
+            "name": "CATEGORY - GET All (Auth)",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{access_token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/api/category",
+                    "host": ["{{base_url}}"],
+                    "path": ["api", "category"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "CATEGORY - GET Detail (Auth)",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{access_token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/api/category/1",
+                    "host": ["{{base_url}}"],
+                    "path": ["api", "category", "1"]
+                },
+                "description": "Ganti angka 1 di URL dengan ID category yang tersedia."
+            },
+            "response": []
+        },
+        {
+            "name": "CATEGORY - POST Create (Auth)",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{access_token}}",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"name\": \"Elektronik\"\n}"
+                },
+                "url": {
+                    "raw": "{{base_url}}/api/category",
+                    "host": ["{{base_url}}"],
+                    "path": ["api", "category"]
+                }
+            },
+            "response": []
+        },
+        {
+            "name": "CATEGORY - PUT Update (Auth)",
+            "request": {
+                "method": "PUT",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{access_token}}",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\n    \"name\": \"Elektronik Updated\"\n}"
+                },
+                "url": {
+                    "raw": "{{base_url}}/api/category/1",
+                    "host": ["{{base_url}}"],
+                    "path": ["api", "category", "1"]
+                },
+                "description": "Ganti angka 1 di URL dengan ID category yang ingin diupdate."
+            },
+            "response": []
+        },
+        {
+            "name": "CATEGORY - DELETE (Auth)",
+            "request": {
+                "method": "DELETE",
+                "header": [
+                    {
+                        "key": "Accept",
+                        "value": "application/json",
+                        "type": "text"
+                    },
+                    {
+                        "key": "Authorization",
+                        "value": "Bearer {{access_token}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/api/category/1",
+                    "host": ["{{base_url}}"],
+                    "path": ["api", "category", "1"]
+                },
+                "description": "Ganti angka 1 di URL dengan ID category yang ingin dihapus."
+            },
+            "response": []
+        }
+    ],
+    "variable": [
+        {
+            "key": "base_url",
+            "value": "http://localhost:8000",
+            "type": "string"
+        },
+        {
+            "key": "access_token",
+            "value": "",
+            "type": "string"
+        }
+    ]
+}
